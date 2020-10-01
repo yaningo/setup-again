@@ -31,7 +31,7 @@ jobs:
               echo "    --remove Microsoft.VisualStudio.Component.Windows10SDK.10586 `">> C:\BuildTools\Dockerfile
               echo "    --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 `">> C:\BuildTools\Dockerfile
               echo "    --remove Microsoft.VisualStudio.Component.Windows81SDK `">> C:\BuildTools\Dockerfile
-              echo  || IF "%ERRORLEVEL%"=="3010" EXIT 0>> C:\BuildTools\Dockerfile
+              echo ' || IF "%ERRORLEVEL%"=="3010" EXIT 0>> C:\BuildTools\Dockerfile'
               echo "# Define the entry point for the docker container.">> C:\BuildTools\Dockerfile
               echo "# This entry point starts the developer command prompt and launches the PowerShell shell.">> C:\BuildTools\Dockerfile
               echo 'ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]'>> C:\BuildTools\Dockerfile
@@ -40,5 +40,6 @@ jobs:
       - run:
           shell: cmd.exe
           command: |
+              cd C:\BuildTools
               docker build -t buildtools2017:latest -m 2GB .
               docker run -it buildtools2017:latest
