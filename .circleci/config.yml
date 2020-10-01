@@ -34,7 +34,7 @@ jobs:
               echo ' || IF \"%ERRORLEVEL%\"=="3010" EXIT 0>> Dockerfile'
               echo "# Define the entry point for the docker container." >> Dockerfile
               echo "# This entry point starts the developer command prompt and launches the PowerShell shell." >> Dockerfile
-              echo 'ENTRYPOINT \[\"C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\", \"\&\&\", \"powershell.exe\", \"\-NoLogo\", \"\-ExecutionPolicy\", \"Bypass\"\]' >> Dockerfile
+              echo 'ENTRYPOINT \[\"C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\", \"\&&\", \"powershell.exe\", \"\-NoLogo\", \"\-ExecutionPolicy\", \"Bypass\"\]' >> Dockerfile
               dir
               cat Dockerfile
 
