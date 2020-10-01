@@ -18,7 +18,7 @@ jobs:
           name: Install Build Tools
           shell: bash.exe
           command: |        
-              cat \<<END_HERDOC > C:\BuildTools\Dockerfile
+              Dockerfile=$(cat \<<END_HEREDOC
               # escape=`
               # Use the latest Windows Server Core image with .NET Framework 4.8.
               FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
@@ -39,7 +39,7 @@ jobs:
               # Define the entry point for the docker container.
               # This entry point starts the developer command prompt and launches the PowerShell shell.
               ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
-              END_HERDOC
+              END_HEREDOC
               
       - run:
           #shell: cmd.exe
