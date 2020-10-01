@@ -19,7 +19,7 @@ jobs:
               echo '# Use the latest Windows Server Core image with .NET Framework 4.8.' >> Dockerfile
               echo 'FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019' >> Dockerfile
               echo '# Restore the default Windows shell for correct batch processing.' >> Dockerfile
-              echo 'SHELL ["cmd", "/S", "/C"]' >> Dockerfile
+              echo 'SHELL [\"cmd", \"/S\", \"/C\"]' >> Dockerfile
               echo '# Download the Build Tools bootstrapper.' >> Dockerfile
               echo 'ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe' >> Dockerfile
               echo '# Install Build Tools with the Microsoft.VisualStudio.Workload.AzureBuildTools workload, excluding workloads and components with known issues.' >> Dockerfile
@@ -31,10 +31,10 @@ jobs:
               echo "    --remove Microsoft.VisualStudio.Component.Windows10SDK.10586 `" >> Dockerfile
               echo "    --remove Microsoft.VisualStudio.Component.Windows10SDK.14393 `" >> Dockerfile
               echo "    --remove Microsoft.VisualStudio.Component.Windows81SDK `" >> Dockerfile
-              echo ' || IF "%ERRORLEVEL%"=="3010" EXIT 0>> Dockerfile'
+              echo ' || IF \"%ERRORLEVEL%\"=="3010" EXIT 0>> Dockerfile'
               echo "# Define the entry point for the docker container." >> Dockerfile
               echo "# This entry point starts the developer command prompt and launches the PowerShell shell." >> Dockerfile
-              echo 'ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]' >> Dockerfile
+              echo 'ENTRYPOINT [\"C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\", \"&&\", \"powershell.exe\", \"-NoLogo\", \"-ExecutionPolicy\", \"Bypass\"]' >> Dockerfile
               dir
               cat Dockerfile
 
