@@ -14,6 +14,7 @@ jobs:
       - run: echo << pipeline.parameters.nice-tag >>
       - run: sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./' > IMAGETAG
       - run:  cat IMAGETAG
+      - run: set IMAGETAG=$(cat IMAGETAG)
 workflows:
   # Name the workflow "welcome"
   welcome:
