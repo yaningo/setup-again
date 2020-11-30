@@ -8,11 +8,12 @@ jobs:
   format-tag:
     docker:
       - image: circleci/python:latest
-    environment:
-      IMAGETAG: $(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')
+    #environment:
+    #  IMAGETAG: $(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')
     steps:
       - run: echo << pipeline.parameters.nice-tag >>
-      - run: echo $IMAGETAG
+      - run: export IMAGETAG=$(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')
+      echo $IMAGETAG
 workflows:
   # Name the workflow "welcome"
   welcome:
