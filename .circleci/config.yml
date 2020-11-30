@@ -6,6 +6,7 @@ parameters:
     default: "@org/package@version"
   IMAGETAG:
     type: string
+    default: ""
 jobs:
   format-tag:
     docker:
