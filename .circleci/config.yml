@@ -8,7 +8,7 @@ jobs:
   format-tag:
     docker:
       - image: circleci/python:latest
-  environment:
+    environment:
       IMAGETAG: $(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')
     steps:
       - run: echo << pipeline.parameters.nice-tag >>
