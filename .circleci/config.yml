@@ -11,7 +11,6 @@ workflows:
           pre-steps:
             - run:
                 command: |
-                  echo << pipeline.parameters.nice-tag >>
                   echo "IMAGETAG=$(sed 's/@//' <<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
                   source $BASH_ENV
                 
