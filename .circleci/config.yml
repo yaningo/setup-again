@@ -4,6 +4,8 @@ parameters:
   nice-tag:
     type: string
     default: "@org/package@version"
+  IMAGETAG:
+    type: string
 jobs:
   format-tag:
     docker:
@@ -14,14 +16,14 @@ jobs:
       - run:
           command: |
             echo << pipeline.parameters.nice-tag >>
-            echo "IMAGETAG=$(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
+            echo "pipeline.parameters.IMAGETAG=$(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
             source $BASH_ENV
             
   other-job:
     docker:
       - image: circleci/python:latest
     steps:
-      - run: echo $IMAGETAG
+      - run: echo << pipeline.parameters.IMAGETAG >>
         
 workflows:
   # Name the workflow "welcome"
