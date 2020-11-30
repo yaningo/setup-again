@@ -14,7 +14,7 @@ jobs:
       - run:
           command: |
             echo << pipeline.parameters.nice-tag >>
-            echo 'IMAGETAG=$(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')' >> $BASH_ENV
+            echo "IMAGETAG=$(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
             source $BASH_ENV
             echo $IMAGETAG
 workflows:
