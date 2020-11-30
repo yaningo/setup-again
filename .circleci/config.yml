@@ -10,8 +10,8 @@ jobs:
       - image: circleci/python:latest
     steps:
       - run: pipeline.parameters.nice-tag = @org/package@version
-      - run: echo << nice-tag >>
-      - run: echo $(sed 's/@//' \<<< << nice-tag >> | sed 's/\//-/' | sed 's/@/./')
+      - run: echo << pipeline.parameters.nice-tag >>
+      - run: echo $(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')
 workflows:
   # Name the workflow "welcome"
   welcome:
