@@ -2,11 +2,7 @@
 version: 2.1
 orbs:
   welcome-orb: circleci/welcome-orb@0.4.1
-parameters:
-  nice-tag:
-    type: string
-    default: "@org/package@version"
-            
+
 workflows:
   # Name the workflow "welcome"
   welcome:
@@ -16,8 +12,8 @@ workflows:
             - run:
                 command: |
                   echo << pipeline.parameters.nice-tag >>
-                  echo "IMAGETAG=$(sed 's/@//' <<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
-                # source $BASH_ENV
+                  echo "IMAGETAG=$(sed 's/@//' <<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
+                  source $BASH_ENV
                 
           post-steps:
             - run:
