@@ -11,7 +11,7 @@ workflows:
           pre-steps:
             - run:
                 command: |
-                  echo "IMAGETAG=$(sed 's/@//' <<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
+                  echo "IMAGETAG=$(sed 's/@//' \<<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')" >> $BASH_ENV
                   source $BASH_ENV
                 
           post-steps:
