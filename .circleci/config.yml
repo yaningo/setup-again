@@ -11,7 +11,7 @@ workflows:
           pre-steps:
             - run:
                 command: |
-                  IMAGETAG=$(sed 's/@//' \<<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./'
+                  IMAGETAG=$(sed 's/@//' \<<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')
                 
           post-steps:
             - run:
