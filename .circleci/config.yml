@@ -6,15 +6,12 @@ parameters:
   nice-tag:
     type: string
     default: "@org/package@version"
-    
-jobs:
-  - welcome/run
             
 workflows:
   # Name the workflow "welcome"
   welcome:
     jobs:
-      - format-tag:
+      - welcome-orb/run:
           pre-steps:
             - run:
                 command: |
