@@ -9,7 +9,7 @@ jobs:
     docker:
       - image: circleci/python:latest
     steps:
-      - run: pipeline.parameters.nice-tag = @org/package@version
+      - run: export pipeline.parameters.nice-tag=@org/package@version
       - run: echo << pipeline.parameters.nice-tag >>
       - run: echo $(sed 's/@//' \<<< << pipeline.parameters.nice-tag >> | sed 's/\//-/' | sed 's/@/./')
 workflows:
