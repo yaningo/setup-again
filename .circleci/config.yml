@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/python:latest
     steps:
-      - run: nice-tag=@org/package@version
+      - run: export nice-tag=@org/package@version
       - run: echo $nice-tag
       - run: echo $(sed 's/@//' \<<< $nice-tag | sed 's/\//-/' | sed 's/@/./')
 workflows:
