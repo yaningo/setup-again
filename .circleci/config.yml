@@ -10,10 +10,9 @@ workflows:
           pre-steps:
             - run:
                 command: |
-                  IMAGETAG=$(sed 's/@//' \<<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')
+                  echo "SUPER CRAZY GLOBAL UPDAAAAAAAAAAAATE!!!!"
                 
           post-steps:
             - run:
                 command: |
-                  echo "SUPER GLOBAL UPDATE!!!!"
-                  echo $IMAGETAG
+                  echo "GLOBAL UPDATE easy-peasy.... not"
