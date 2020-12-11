@@ -12,7 +12,7 @@ workflows:
                 command: |
                   IMAGETAG=$(sed 's/@//' \<<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')
                 
-          pre-steps:
+          post-steps:
             - run:
                 command: |
                   echo "SUPER GLOBAL UPDATE!!!!"
