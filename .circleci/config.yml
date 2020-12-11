@@ -1,0 +1,19 @@
+version: 2.1
+orbs:
+  welcome-orb: circleci/welcome-orb@0.4.1
+
+workflows:
+  # Name the workflow "welcome"
+  welcome:
+    jobs:
+      - welcome-orb/run:
+          pre-steps:
+            - run:
+                command: |
+                  IMAGETAG=$(sed 's/@//' \<<< ${CIRCLE_JOB} | sed 's/\//-/' | sed 's/@/./')
+                
+          pre-steps:
+            - run:
+                command: |
+                  echo "SUPER GLOBAL UPDATE!!!!"
+                  echo $IMAGETAG
