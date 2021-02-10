@@ -7,10 +7,19 @@ workflows:
   welcome:
     jobs:
       - welcome-orb/run:
+      
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+              
           pre-steps:
             - run:
                 command: |
                   echo "SUPER CRAZY GLOBAL UPDAAAAAAAAAAAATE!!!!"
+                  
+          
                 
           post-steps:
             - run:
