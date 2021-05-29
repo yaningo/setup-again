@@ -50,7 +50,7 @@ jobs:
           central-repo: yaningo/global-config
           central-branch: main
           config-to-pull: global-ci.yml
-      -run: echo ' export MAIN_CONFIG = << parameters.main-config >> ' >> BASH_ENV
+      -run: echo ' export MAIN_CONFIG=<< parameters.main-config >> ' >> BASH_ENV
       - continuation/continue:
           configuration_path: $MAIN_CONFIG
 
