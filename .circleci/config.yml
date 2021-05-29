@@ -12,8 +12,7 @@ jobs:
       - run:
           name: Pull remote config
           command: |
-            curl --location --request GET 'https://api.github.com/repos/yaningo/global-config/contents/global-ci.yml' > main.yml
---header 'Accept: application/vnd.github.VERSION.raw'
+            curl --location --request GET 'https://api.github.com/repos/yaningo/global-config/contents/global-ci.yml' > main.yml --header 'Accept: application/vnd.github.VERSION.raw'
       - continuation/continue:
           configuration_path: main.yml
 
