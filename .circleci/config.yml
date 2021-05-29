@@ -16,9 +16,9 @@ commands:
       central-branch:
         type: string
         default: ''
-      config-to-pull:
+      central-config:
         type: string
-      main-config:
+      local-config:
         type: string
         default: main.yml
         
@@ -28,15 +28,15 @@ commands:
           environment:
             CENTRAL_REPO: << parameters.central-repo >>
             CENTRAL_BRANCH: << parameters.central-branch >>
-            CENTRAL_CONFIG: << parameters.config-to-pull >>
+            CENTRAL_CONFIG: << parameters.central >>
             FORCE: << parameters.force-update >>
-            MAIN_CONFIG: << parameters.main-config >>
+            LOCAL_CONFIG: << parameters.local-config >>
           command: |
             PullConf() {
               if [ -z "${CENTRAL_BRANCH:-}" ]; then
-                curl --location --request GET "https://api.github.com/repos/$CENTRAL_REPO/contents/$CENTRAL_CONFIG" --header 'Accept: application/vnd.github.VERSION.raw' > $MAIN_CONFIG 
+                curl --location --request GET "https://api.github.com/repos/$CENTRAL_REPO/contents/$CENTRAL_CONFIG" --header 'Accept: application/vnd.github.VERSION.raw' > $LOCAL_CONFIG 
               else
-                curl --location --request GET "https://api.github.com/repos/$CENTRAL_REPO/contents/$CENTRAL_CONFIG?ref=$CENTRAL_BRANCH" --header 'Accept: application/vnd.github.VERSION.raw' > $MAIN_CONFIG 
+                curl --location --request GET "https://api.github.com/repos/$CENTRAL_REPO/contents/$CENTRAL_CONFIG?ref=$CENTRAL_BRANCH" --header 'Accept: application/vnd.github.VERSION.raw' > $LOCAL_CONFIG 
               fi
             }
             
@@ -44,22 +44,17 @@ commands:
 
 jobs:
   setup:
-    parameters:
-      main-config:
-        type: string
-        
     executor: continuation/default
     steps:
       - pull-config:
           central-repo: yaningo/global-config
           central-branch: main
           config-to-pull: global-ci.yml
-          main-config: << parameters.main-config >>
+      -run: echo ' export MAIN_CONFIG = << parameters.main-config >> ' >> BASH_ENV
       - continuation/continue:
-          configuration_path: << parameters.main-config >>
+          configuration_path: $MAIN_CONFIG
 
 workflows:
   setup:
     jobs:
-      - setup:
-          main-config: toto.yml
+      - setup
