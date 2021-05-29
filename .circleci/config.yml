@@ -20,7 +20,7 @@ commands:
         type: string
       local-config:
         type: string
-        default: main.yml
+        default: local.yml
         
     steps:
       - run:
@@ -46,16 +46,21 @@ commands:
 
 jobs:
   setup:
+    parameters:
+      main-config:
+        type: string
     executor: continuation/default
     steps:
       - pull-config:
           central-repo: yaningo/global-config
           central-branch: main
           central-config: global-ci.yml
+          local-config: << parameters.main-config >>
       - continuation/continue:
-          configuration_path: $LOCAL_CONFIG
+          configuration_path: << parameters.main-config >>
 
 workflows:
   setup:
     jobs:
-      - setup
+      - setup:
+          main-config: toto.yml
