@@ -4,17 +4,53 @@ setup: true
  
 orbs:
   continuation: circleci/continuation@0.1.2
+  
+commands:
+  pull-config:
+    parameters:
+      force-update:
+        type: boolean
+        default: false
+      central-repo:
+        type: string
+      central-branch:
+        type: string
+        default: ''
+      config-to-pull:
+        type: string
+      main-config:
+        type: string
+        
+    steps:
+      - run:
+          name: Checking and pull
+          environment:
+            CENTRAL_REPO: << parameters.central-repo >>
+            CENTRAL_BRANCH: << parameters.central-branch >>
+            CENTRAL_CONFIG: << parameters.config-to-pull >>
+            FORCE: << parameters.force-update >>
+            MAIN_CONFIG: << parameters.main-config >>
+          command: |
+            PullConf() {
+              if [ -z "${CENTRAL_BRANCH:-}" ]; then
+                curl --location --request GET 'https://api.github.com/repos/$C{ENTRAL_REPO}/contents/${CENTRAL_CONFIG}' > ${MAIN_CONFIG} --header 'Accept: application/vnd.github.VERSION.raw'
+              else
+                curl --location --request GET 'https://api.github.com/repos/$C{ENTRAL_REPO}/contents/${CENTRAL_CONFIG}?ref=${CENTRAL_BRANCH}' > ${MAIN_CONFIG} --header 'Accept: application/vnd.github.VERSION.raw'
+            }
+            
+            PullConf
 
 jobs:
   setup:
     executor: continuation/default
     steps:
-      - run:
-          name: Pull remote config
-          command: |
-            curl --location --request GET 'https://api.github.com/repos/yaningo/global-config/contents/global-ci.yml' > main.yml --header 'Accept: application/vnd.github.VERSION.raw'
+      - pull-config:
+          central-repo: yaningo/global-congi
+          central-branch: main
+          config-to-pull: global-ci.yml
+          main-config: toto.yml
       - continuation/continue:
-          configuration_path: main.yml
+          configuration_path: << parameters.main-config >>
 
 workflows:
   setup:
