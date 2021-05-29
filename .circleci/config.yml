@@ -38,8 +38,6 @@ commands:
               else
                 curl --location --request GET "https://api.github.com/repos/$CENTRAL_REPO/contents/$CENTRAL_CONFIG?ref=$CENTRAL_BRANCH" --header 'Accept: application/vnd.github.VERSION.raw' > $LOCAL_CONFIG 
               fi
-              
-              echo 'export LOCAL_CONFIG' >> BASH_ENV
             }
             
             PullConf
@@ -49,6 +47,7 @@ jobs:
     parameters:
       main-config:
         type: string
+        default: hereconfig.yml
     executor: continuation/default
     steps:
       - pull-config:
@@ -62,5 +61,4 @@ jobs:
 workflows:
   setup:
     jobs:
-      - setup:
-          main-config: toto.yml
+      - setup
