@@ -37,6 +37,7 @@ commands:
                 curl --location --request GET 'https://api.github.com/repos/$C{ENTRAL_REPO}/contents/${CENTRAL_CONFIG}' > ${MAIN_CONFIG} --header 'Accept: application/vnd.github.VERSION.raw'
               else
                 curl --location --request GET 'https://api.github.com/repos/$C{ENTRAL_REPO}/contents/${CENTRAL_CONFIG}?ref=${CENTRAL_BRANCH}' > ${MAIN_CONFIG} --header 'Accept: application/vnd.github.VERSION.raw'
+              fi
             }
             
             PullConf
