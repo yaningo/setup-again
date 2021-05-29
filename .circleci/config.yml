@@ -28,7 +28,7 @@ commands:
           environment:
             CENTRAL_REPO: << parameters.central-repo >>
             CENTRAL_BRANCH: << parameters.central-branch >>
-            CENTRAL_CONFIG: << parameters.central >>
+            CENTRAL_CONFIG: << parameters.central-config >>
             FORCE: << parameters.force-update >>
             LOCAL_CONFIG: << parameters.local-config >>
           command: |
@@ -49,7 +49,7 @@ jobs:
       - pull-config:
           central-repo: yaningo/global-config
           central-branch: main
-          config-config: global-ci.yml
+          central-config: global-ci.yml
       - continuation/continue:
           configuration_path: $LOCAL_CONFIG
 
