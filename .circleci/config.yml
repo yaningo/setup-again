@@ -49,7 +49,7 @@ jobs:
       - pull-config:
           central-repo: yaningo/global-config
           central-branch: main
-          config-to-pull: global-ci.yml
+          config-config: global-ci.yml
       - continuation/continue:
           configuration_path: $LOCAL_CONFIG
 
