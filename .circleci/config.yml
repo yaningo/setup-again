@@ -34,9 +34,9 @@ commands:
           command: |
             PullConf() {
               if [ -z "${CENTRAL_BRANCH:-}" ]; then
-                curl --location --request GET 'https://api.github.com/repos/${CENTRAL_REPO}/contents/${CENTRAL_CONFIG}' > ${MAIN_CONFIG} --header 'Accept: application/vnd.github.VERSION.raw'
+                curl --location --request GET 'https://api.github.com/repos/${CENTRAL_REPO}/contents/${CENTRAL_CONFIG}' --header 'Accept: application/vnd.github.VERSION.raw' > ${MAIN_CONFIG} 
               else
-                curl --location --request GET 'https://api.github.com/repos/${CENTRAL_REPO}/contents/${CENTRAL_CONFIG}?ref=${CENTRAL_BRANCH}' > ${MAIN_CONFIG} --header 'Accept: application/vnd.github.VERSION.raw'
+                curl --location --request GET 'https://api.github.com/repos/${CENTRAL_REPO}/contents/${CENTRAL_CONFIG}?ref=${CENTRAL_BRANCH}' --header 'Accept: application/vnd.github.VERSION.raw' > ${MAIN_CONFIG} 
               fi
             }
             
