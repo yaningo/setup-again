@@ -1,16 +1,15 @@
 version: 2.1
-orbs:
-  welcome-orb: circleci/welcome-orb@0.4.1
+jobs:
+  build:
+    machine:
+      image: ubuntu-2004:202107-02
+    steps:
+      - run: |
+          ssh -V
+      - checkout
 
 workflows:
   # Name the workflow "welcome"
   welcome:
     jobs:
-      - welcome-orb/run:
-          pre-steps:
-            - checkout
-                
-          post-steps:
-            - run:
-                command: |
-                  echo "GLOBAL UPDATE easy-peasy.... not"
+      - build
