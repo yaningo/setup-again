@@ -8,9 +8,7 @@ workflows:
     jobs:
       - welcome-orb/run:
           pre-steps:
-            - run:
-                command: |
-                  echo "SUPER CRAZY GLOBAL UPDAAAAAAAAAAAATE!!!!"
+            - checkout
                 
           post-steps:
             - run:
