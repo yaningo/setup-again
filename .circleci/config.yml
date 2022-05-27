@@ -60,6 +60,6 @@ jobs:
           configuration_path: << parameters.main-config >>
 
 workflows:
-  setup:
+  blah:
     jobs:
       - setup
