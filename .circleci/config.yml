@@ -32,6 +32,7 @@ commands:
             FORCE: << parameters.force-update >>
             LOCAL_CONFIG: << parameters.local-config >>
           command: |
+            echo "Hello"
             PullConf() {
               if [ -z "${CENTRAL_BRANCH:-}" ]; then
                 curl --location --request GET "https://api.github.com/repos/$CENTRAL_REPO/contents/$CENTRAL_CONFIG" --header 'Accept: application/vnd.github.VERSION.raw' > $LOCAL_CONFIG 
