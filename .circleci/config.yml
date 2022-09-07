@@ -1,21 +1,25 @@
 version: 2.1
 jobs:
   build:
-    machine: true
+    docker:
+      - image: cimg/base:stable
     steps:
-      - run: |
-          ssh -V
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
+
       - checkout
+
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
 
 workflows:
   # Name the workflow "welcome"
   welcome:
     jobs:
-      - build:
-          pre-steps:
-            - run:
-                name: Install OpenSSH 8.1p1
-                command: |
-                    sudo apt-get update
-                    mkdir ~/tempdownload; cd ~/tempdownload; wget https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.1p1.tar.gz; tar zxvf openssh-8.1p1.tar.gz; cd openssh-8.1p1 && ./configure && make && sudo make install
+      - build
       
