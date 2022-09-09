@@ -42,10 +42,6 @@ jobs:
             paths:
               - JUnitReports
 
-      - persist_to_workspace:
-          root: .
-          paths:
-            - JUnitReports
 #       - run: exit 1
 
   attach_to_workspace:
