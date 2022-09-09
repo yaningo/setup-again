@@ -39,9 +39,9 @@ jobs:
       - run: cat JUnitReports/hello.txt
 
       - persist_to_workspace:
-          root: JUnitReports
+          root: .
           paths:
-            - hello.txt
+            - JUnitReports
 #       - run: exit 1
 
   attach_to_workspace:
