@@ -35,7 +35,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir JUnitReports
-      - run: cp ~/.circleci/config.yml JUnitReports/hello.txt
+      - run: cp ~/project/.circleci/config.yml JUnitReports/hello.txt
 #       - run: echo "hello" > JUnitReports/hello.txt
       - run: cat JUnitReports/hello.txt
 
