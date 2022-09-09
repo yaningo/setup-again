@@ -51,7 +51,7 @@ jobs:
 #     macos:
 #       xcode: 13.4.1
     steps:
-      - run: mkdir /tmp/workspace
+      - run: mkdir -p /tmp/workspace/JUnitReports
       - attach_workspace:
           at: /tmp/workspace
       - run: ls -al /tmp
