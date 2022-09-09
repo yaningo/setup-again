@@ -34,14 +34,14 @@ jobs:
 #       xcode: 13.4.1
     steps:
       - checkout
-      - run: mkdir ./JUnitReports
+      - run: mkdir JUnitReports
       - run: echo "hello" > JUnitReports/hello.txt
       - run: cat JUnitReports/hello.txt
 
       - persist_to_workspace:
-            root: JUnitReports
-            paths:
-              - hello.txt
+          root: JUnitReports
+          paths:
+            - hello.txt
 #       - run: exit 1
 
   attach_to_workspace:
