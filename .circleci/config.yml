@@ -39,9 +39,9 @@ jobs:
       - run: cat JUnitReports/hello.txt
 
       - persist_to_workspace:
-            root: .
+            root: JUnitReports
             paths:
-              - JUnitReports/hello.txt
+              - hello.txt
 #       - run: exit 1
 
   attach_to_workspace:
@@ -55,8 +55,8 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: ls -al /tmp
-      - run: sudo ls -al /tmp/workspace
-      - run: sudo ls -al /tmp/workspace/JUnitReports/*
+      - run: ls -al /tmp/workspace
+      - run: ls -al /tmp/workspace/JUnitReports/*
 
   waiter:
     docker: 
