@@ -27,8 +27,11 @@ version: 2.1
 
 jobs:
   sanity_autotest:
-    macos:
-      xcode: 13.4.1
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+#     macos:
+#       xcode: 13.4.1
     steps:
       - checkout
       - run: mkdir ~/JUnitReports
@@ -40,17 +43,21 @@ jobs:
 #       - run: exit 1
 
   attach_to_workspace:
-    macos:
-      xcode: 13.4.1
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+#     macos:
+#       xcode: 13.4.1
     steps:
       - run: mkdir /tmp/workspace
       - attach_workspace:
           at: /tmp/workspace
+      - run: ls /tmp/workspace
       - run: ls /tmp/workspace/JUnitReports/*
 
   waiter:
     docker: 
-      - image: circleci/node
+      - image: cimg/base:stable
     steps:
       - run: |
           while [[ $(curl --location --request GET "https://circleci.com/api/v2/workflow/$CIRCLE_WORKFLOW_ID/job" --header "Circle-Token: $CCI_TOKEN"| jq -r '.items[]|select(.name != "waiter")|.status' | grep -c "running") -gt 0 ]]
