@@ -36,6 +36,8 @@ jobs:
       - checkout
       - run: mkdir ./JUnitReports
       - run: echo "hello" > ./JUnitReports/hello.txt
+      - run: cat ./JUnitReports/hello.txt
+
       - persist_to_workspace:
             root: .
             paths:
