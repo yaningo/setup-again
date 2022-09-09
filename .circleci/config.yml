@@ -35,8 +35,8 @@ jobs:
     steps:
       - checkout
       - run: mkdir ./JUnitReports
-      - run: echo "hello" > ./JUnitReports/hello.txt
-      - run: cat ./JUnitReports/hello.txt
+      - run: echo "hello" > JUnitReports/hello.txt
+      - run: cat JUnitReports/hello.txt
 
       - persist_to_workspace:
             root: .
@@ -51,12 +51,12 @@ jobs:
 #     macos:
 #       xcode: 13.4.1
     steps:
-      - run: mkdir -p /tmp/workspace/JUnitReports
+#       - run: mkdir -p /tmp/workspace/JUnitReports
       - attach_workspace:
           at: /tmp/workspace
       - run: ls -al /tmp
-      - run: ls -al /tmp/workspace
-      - run: ls -al /tmp/workspace/JUnitReports/*
+      - run: sudo ls -al /tmp/workspace
+      - run: sudo ls -al /tmp/workspace/JUnitReports/*
 
   waiter:
     docker: 
