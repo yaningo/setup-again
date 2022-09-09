@@ -41,7 +41,7 @@ jobs:
       - persist_to_workspace:
             root: .
             paths:
-              - JUnitReports/*
+              - JUnitReports/hello.txt
 #       - run: exit 1
 
   attach_to_workspace:
