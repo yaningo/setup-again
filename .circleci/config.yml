@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.4.0
+  win: circleci/windows@5.0.0
   
 workflows:
   btd:
@@ -10,77 +10,78 @@ workflows:
 jobs:
   build:
     executor:
-      name: win/default
+      name: win/server-2022
       
     steps:
-      - run:
-          name: Memory consumption
-          shell: bash
-          background: true
-          command: |
-            # Log memory consumption as asked by the CircleCI team to
-            # investigate the root cause behind the OpenVPN error.
-            # Refs: https://bitbucket.org/postmanlabs/starship/pull-requests/901
-            while true; do
-              sleep 5
-              systeminfo | find "Available Physical Memory"
-              echo "======"
-            done
-      - run:
-          shell: bash
-          background: true
-          command: |
-            typeperf -si 2 "\Memory\Available MBytes"
-          name: Monitoring available memory
+      - run: node -v
+      # - run:
+      #     name: Memory consumption
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       # Log memory consumption as asked by the CircleCI team to
+      #       # investigate the root cause behind the OpenVPN error.
+      #       # Refs: https://bitbucket.org/postmanlabs/starship/pull-requests/901
+      #       while true; do
+      #         sleep 5
+      #         systeminfo | find "Available Physical Memory"
+      #         echo "======"
+      #       done
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       typeperf -si 2 "\Memory\Available MBytes"
+      #     name: Monitoring available memory
 
-      - run:
-          shell: bash
-          background: true
-          command: |
-            typeperf -si 2 "\Network Interface(*)\Current Bandwidth"
-          name: Monitoring bandwidth
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       typeperf -si 2 "\Network Interface(*)\Current Bandwidth"
+      #     name: Monitoring bandwidth
 
-      - run:
-          shell: bash
-          background: true
-          command: |
-            typeperf -si 2 "\Network Interface(*)\Output Queue Length"
-          name: Monitoring output queue
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       typeperf -si 2 "\Network Interface(*)\Output Queue Length"
+      #     name: Monitoring output queue
 
-      - run:
-          shell: bash
-          background: true
-          command: |
-            typeperf -si 2 "\LogicalDisk(*)\Current Disk Queue Length"
-          name: Monitoring logical disk queue
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       typeperf -si 2 "\LogicalDisk(*)\Current Disk Queue Length"
+      #     name: Monitoring logical disk queue
 
-      - run:
-          shell: bash
-          background: true
-          command: |
-            typeperf -si 3 "\LogicalDisk(*)\Avg. Disk sec/Transfer"
-          name: Monitoring logical disk transfer speed
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       typeperf -si 3 "\LogicalDisk(*)\Avg. Disk sec/Transfer"
+      #     name: Monitoring logical disk transfer speed
 
-      - run:
-          shell: bash
-          background: true
-          command: |
-            typeperf -si 2 "\PhysicalDisk(*)\Current Disk Queue Length"
-          name: Monitoring physical disk queue
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       typeperf -si 2 "\PhysicalDisk(*)\Current Disk Queue Length"
+      #     name: Monitoring physical disk queue
 
-      - run:
-          shell: bash
-          background: true
-          command: |
-            typeperf -si 2 "\PhysicalDisk(*)\Avg. Disk sec/Transfer"
-          name: Monitoring physical disk transfer speed
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       typeperf -si 2 "\PhysicalDisk(*)\Avg. Disk sec/Transfer"
+      #     name: Monitoring physical disk transfer speed
 
-      - run:
-          shell: bash
-          background: true
-          command: |
-            netstat -n 2
-          name: Monitoring network connections
-      - run:
-          name: Install OpenConnect VPN
-          command: choco install openconnect-gui -y
+      # - run:
+      #     shell: bash
+      #     background: true
+      #     command: |
+      #       netstat -n 2
+      #     name: Monitoring network connections
+      # - run:
+      #     name: Install OpenConnect VPN
+      #     command: choco install openconnect-gui -y
