@@ -10,7 +10,8 @@ workflows:
 jobs:
   build:
     executor:
-      name: win/server-2022
+      # name: win/server-2022
+      name: win/default
       
     steps:
       - run: node -v
