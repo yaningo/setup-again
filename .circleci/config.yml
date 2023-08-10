@@ -11,7 +11,8 @@ jobs:
   build:
     executor:
       # name: win/server-2022
-      name: win/default
+      # name: win/default
+       name: win/server-2019
       
     steps:
       - run: node -v
